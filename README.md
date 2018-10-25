@@ -1,4 +1,4 @@
-** Steps for Deploying the App
+**Steps for Deploying the App**
 1. Start minikube using `minikube start`.
 2. After minkube has started use `eval $(minkube docker-env)` to use the docker environment in minikube.
 3. Then to create the seperate docker images for the seperate environments use the commands 
