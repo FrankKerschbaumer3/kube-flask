@@ -1,0 +1,38 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: qa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qa
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: qa
+    spec:
+      containers:
+        - name: qa-app
+          image: qa:latest
+          ports:
+          - containerPort: 5000
+          imagePullPolicy: Never
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: qa-app
+spec:
+  type: NodePort
+  selector:
+    app: qa
+  ports:
+  - port: 5000
+    targetPort: 5000
+    nodePort: 30002

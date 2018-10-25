@@ -1,0 +1,38 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: dev
+    spec:
+      containers:
+        - name: dev-app
+          image: dev:latest
+          ports:
+          - containerPort: 5000
+          imagePullPolicy: Never
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: dev-app
+spec:
+  type: NodePort
+  selector:
+    app: dev
+  ports:
+  - port: 5000
+    targetPort: 5000
+    nodePort: 30003
