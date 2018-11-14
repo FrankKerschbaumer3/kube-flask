@@ -1,15 +1,14 @@
+---
 kind: Service
 apiVersion: v1
 metadata:
-  name: qa-app
+  name: qa
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: qa
   ports:
-  - port: 5000
-    targetPort: 5000
-    nodePort: 30002
+    - port: 5000
 ---
 kind: Deployment
 apiVersion: extensions/v1beta1
@@ -31,7 +30,7 @@ spec:
         app: qa
     spec:
       containers:
-        - name: qa-app
+        - name: qa
           image: qa:latest
           ports:
           - containerPort: 5000

@@ -1,0 +1,21 @@
+config:
+  target: 'http://dev.kube'
+  phases:
+    - duration: 5
+      arrivalRate: 20
+    #- duration: 60
+    #  arrivalRate: 50
+  processor: "./my-functions.js"
+
+scenarios:
+  - name: "Adding users"
+    flow:
+      - function: "generateRandomData"
+      - post:
+          url: "/register"
+          json:
+            username: "{{ username }}"
+            email: "{{ email }}"
+            password: "{{ password }}"  
+            password2: "{{ password }}"
+      - log: "Sent a request to /register with {{ Username }}, {{ Email }}, {{ Password }}"

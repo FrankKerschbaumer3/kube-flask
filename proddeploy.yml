@@ -1,15 +1,14 @@
+---
 kind: Service
 apiVersion: v1
 metadata:
-  name: prod-app
+  name: prod
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: prod
   ports:
-  - port: 5000
-    targetPort: 5000
-    nodePort: 30001
+    - port: 5000
 ---
 kind: Deployment
 apiVersion: extensions/v1beta1
@@ -31,7 +30,7 @@ spec:
         app: prod
     spec:
       containers:
-        - name: prod-app
+        - name: prod
           image: prod:latest
           ports:
           - containerPort: 5000

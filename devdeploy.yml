@@ -1,15 +1,14 @@
+---
 kind: Service
 apiVersion: v1
 metadata:
-  name: dev-app
+  name: dev
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: dev
   ports:
-  - port: 5000
-    targetPort: 5000
-    nodePort: 30003
+    - port: 5000
 ---
 kind: Deployment
 apiVersion: extensions/v1beta1
@@ -31,7 +30,7 @@ spec:
         app: dev
     spec:
       containers:
-        - name: dev-app
+        - name: dev
           image: dev:latest
           ports:
           - containerPort: 5000

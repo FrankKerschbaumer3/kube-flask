@@ -7,7 +7,7 @@ RUN flask initdb
 # Unit tests
 # python setup.py test
 EXPOSE 5000
-CMD [ "flask", "run", "--host=0.0.0.0" ]
+CMD [ "flask", "run", "--host=0.0.0.0"]
 
 
 

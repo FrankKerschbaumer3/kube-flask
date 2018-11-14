@@ -1,0 +1,13 @@
+config:
+  target: 'http://dev.kube'
+  phases:
+    - duration: 30 # seconds
+      arrivalRate: 5 # requests per second
+      rampTo: 30 # requests per second
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
+scenarios:
+  - flow:
+    - get:
+        url: "/"
