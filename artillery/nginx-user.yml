@@ -1,0 +1,24 @@
+config:
+  target: 'http://dev.kube'
+  phases:
+    - duration: 30
+      arrivalRate: 6
+      rampTo: 20
+  plugins:
+    faker:
+      locale: 'en'
+  variables:
+    username: [ '$faker.internet.userName' ]
+    email: [ '$faker.internet.exampleEmail' ]
+    password: [ '$faker.internet.password', 15 ]
+scenarios:
+  - flow:
+    - post:    
+        url: "/register"
+        followRedirect: false
+        form:
+          username: "{{ username }}"
+          email: "{{ email }}"
+          password: "{{ password }}"  
+          password2: "{{ password }}"
+    - log: "Sent random data with...\n{{ username }}\n{{ email }}\n{{ password }}"
