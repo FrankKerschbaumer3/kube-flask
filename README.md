@@ -14,7 +14,7 @@ If done correctly you can use *`minkube service dev-app`, *`minkube service qa-a
 
 If you would like to test using nginx as an ingress and test the application using artillery.
 
-1. Run the hosts.sh in the hosts diretcory using *`sudo sh hosts.sh` which will add *`192.168.99.100    dev.kube` to your hosts file which will allow local domain resolution to the IP of Minikube.
+1. Navigate to the `/kubernetes-yml` and run the hosts.sh using *`sudo sh hosts.sh add` which will add *`192.168.99.100    dev.kube` to your hosts file which will allow local domain resolution to the IP of Minikube.
 2. Next head to the `/kubernetes-yml` directory and run *`kubectl apply -f ingress.yml` which will create the nginx ingress.
 3. Use *`kubectl get ingresses.extensions --watch` and when the ip address shows up you will be able to reach the app at `dev.kube/` using the nginx ingress.
 
@@ -24,4 +24,4 @@ If wanting to test the dev environment with artillery.
 2. Run *`eval "$(docker-machine env -u)"` to switch the docker-env back your local machine.
 3. Run *`docker build -t artillery .` and then *`docker run --rm artillery:latest`
 
-When done you can use *`minikube delete` to remove the minikube environment from you computer.
+When done you can use *`minikube delete` to remove the minikube environment from you computer and run *`sudo hosts.sh remove` to remove the 
