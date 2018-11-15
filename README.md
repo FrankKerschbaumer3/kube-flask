@@ -25,3 +25,5 @@ If wanting to test the dev environment with artillery.
 3. Run *`docker build -t artillery .` and then *`docker run --rm artillery:latest`
 
 When done you can use *`minikube delete` to remove the minikube environment from you computer and run *`sudo hosts.sh remove` to remove the 
+
+Credit to `https://github.com/codefresh-contrib/python-flask-sample-app` for the dockerization of the minitwit application.
