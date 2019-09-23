@@ -1,56 +1,17 @@
-
+---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: dev
-  annotations:
-    nginx.org/redirect-to-https: False
+  namespace: dev
+  annotations: 
+    nginx.ingress.kubernetes.io/rewrite-target: /ci
+    kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-  - host: dev.kube
-    http:
+   - http:
       paths:
-      - path: /
+      - path: /ci/*
         backend:
           serviceName: dev
           servicePort: 5000
-      - path: /register
-        backend:
-          serviceName: dev
-          servicePort: 5000
-      - path: /login
-        backend:
-          serviceName: dev
-          servicePort: 5000
-  #- host: qa.kube
-  #  http:
-  #    paths:
-  #    - path: /
-  #      backend:
-  #        serviceName: qa
-  #        servicePort: 5000
-  #    - path: /register
-  #      backend:
-  #        serviceName: qa
-  #        servicePort: 5000
-  #    - path: /login
-  #      backend:
-  #        serviceName: qa
-  #        servicePort: 5000
-  #- host: prod.kube
-  #  http:
-  #    paths:
-  #    - path: /
-  #      backend:
-  #        serviceName: prod
-  #        servicePort: 5000
-  #    - path: /register
-  #      backend:
-  #        serviceName: prod
-  #        servicePort: 5000
-  #    - path: /login
-  #      backend:
-  #        serviceName: prod
-  #        servicePort: 5000 
-  
-        
